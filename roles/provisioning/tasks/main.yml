@@ -1,0 +1,70 @@
+---
+
+- name: Provision OCP Masters
+  ec2:
+     key_name: 'aws-ocp-keypair'
+     group_id: 'sg-8c4e06ea'
+     instance_type: 't2.micro'
+     aws_access_key: "{{ aws_access_key }}"
+     aws_secret_key: "{{ aws_secret_key }}"
+     image: "{{ aws_ami_id }}"
+     region: "{{ aws_region }}"
+     wait: true
+     exact_count: 1
+     count_tag: 'ocp_master'
+     instance_tags:
+        env: 'ocp_master'
+        hostname: "{{ item }}"
+        Name: "{{ item }}"
+  with_items: "{{ master_nodes }}"
+  register: ec2_masters
+
+- name: Provision OCP Infrastructure Nodes
+  ec2:
+     key_name: 'aws-ocp-keypair'
+     group_id: 'sg-8c4e06ea'
+     instance_type: 't2.micro'
+     aws_access_key: "{{ aws_access_key }}"
+     aws_secret_key: "{{ aws_secret_key }}"
+     image: "{{ aws_ami_id }}"
+     region: "{{ aws_region }}"
+     wait: true
+     exact_count: 1
+     count_tag: 'ocp_infra'
+     instance_tags:
+        env: 'ocp_infra'
+        hostname: "{{ item }}"
+        Name: "{{ item }}"
+  with_items: "{{ infra_nodes }}"
+  register: ec2_infra
+
+- name: Provision OCP Application Nodes
+  ec2:
+     key_name: 'aws-ocp-keypair'
+     group_id: 'sg-8c4e06ea'
+     instance_type: 't2.micro'
+     aws_access_key: "{{ aws_access_key }}"
+     aws_secret_key: "{{ aws_secret_key }}"
+     image: "{{ aws_ami_id }}"
+     region: "{{ aws_region }}"
+     wait: true
+     exact_count: 1
+     count_tag: 'ocp_app'
+     instance_tags:
+        env: 'ocp_app'
+        hostname: "{{ item }}"
+        Name: "{{ item }}"
+  with_items: "{{ app_nodes }}"
+  register: ec2_app
+
+- name: Wait for ssh to come up
+  wait_for: 
+    host: "{{ item.instances[0].public_dns_name }}" 
+    port: 22 
+    delay: 10  
+    timeout: 300
+  with_items: 
+    - "{{ ec2_masters.results }}"
+    - "{{ ec2_infra.results }}"
+    - "{{ ec2_app.results }}"
+

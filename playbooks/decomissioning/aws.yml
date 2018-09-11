@@ -13,7 +13,5 @@
          aws_secret_key: "{{ aws_secret_key }}"
          region: "{{ aws_region }}"
          instance_ids: "{{ ec2_id }}"
-         instance_tags:
-            Name: 'ocp_master'
       delegate_to: "localhost"
 
