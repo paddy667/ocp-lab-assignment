@@ -1,0 +1,5 @@
+---
+
+openshift_node_labels: 
+  env: 'app' 
+  cluster: '9e95'

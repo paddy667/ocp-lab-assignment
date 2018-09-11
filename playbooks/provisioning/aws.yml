@@ -1,0 +1,57 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision OCP Masters
+      ec2:
+         key_name: 'aws-ocp-keypair'
+         group_id: 'sg-8c4e06ea'
+         instance_type: 't2.micro'
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         image: "{{ aws_ami_id }}"
+         region: "{{ aws_region }}"
+         wait: true
+         exact_count: 3
+         count_tag: 'ocp_master'
+         instance_tags:
+            env: 'ocp_master'
+
+    - name: Provision OCP Infrastructure Nodes
+      ec2:
+         key_name: 'aws-ocp-keypair'
+         group_id: 'sg-8c4e06ea'
+         instance_type: 't2.micro'
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         image: "{{ aws_ami_id }}"
+         region: "{{ aws_region }}"
+         wait: true
+         exact_count: 2
+         count_tag: 'ocp_infra'
+         instance_tags:
+            env: 'ocp_infra'
+
+    - name: Provision OCP Application Nodes
+      ec2:
+         key_name: 'aws-ocp-keypair'
+         group_id: 'sg-8c4e06ea'
+         instance_type: 't2.micro'
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         image: "{{ aws_ami_id }}"
+         region: "{{ aws_region }}"
+         wait: true
+         exact_count: 2
+         count_tag: 'ocp_app'
+         instance_tags:
+            env: 'ocp_app'
+
+#    - name: print ec2
+#      debug: 
+#        var: ec2
+

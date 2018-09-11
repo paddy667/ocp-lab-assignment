@@ -1,0 +1,6 @@
+---
+
+openshift_node_labels:
+  env: 'master'
+  cluster: '9e95'
+

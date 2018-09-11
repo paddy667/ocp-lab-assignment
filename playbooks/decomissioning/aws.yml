@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Decom OCP Environment
+      ec2:
+         state: 'absent'
+         aws_access_key: "{{ aws_access_key }}"
+         aws_secret_key: "{{ aws_secret_key }}"
+         region: "{{ aws_region }}"
+         instance_ids: "{{ ec2_id }}"
+         instance_tags:
+            Name: 'ocp_master'
+      delegate_to: "localhost"
+

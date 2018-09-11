@@ -1,0 +1,6 @@
+---
+
+openshift_node_labels:
+  env: 'infra'
+  cluster: '9e95'
+
