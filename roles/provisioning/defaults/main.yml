@@ -2,7 +2,7 @@
 master_nodes:
   - master1.sre.tech
   - master2.sre.tech
-#  - master3.sre.tech
+  - master3.sre.tech
 infra_nodes:
   - infra1.sre.tech
   - infra2.sre.tech
