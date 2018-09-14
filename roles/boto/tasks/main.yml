@@ -1,0 +1,19 @@
+---
+
+# Deploy the Boto config used for the ec2 dynamic inventory
+
+- name: Install boto pip modules for AWS
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - boto
+    - boto3
+
+- name: Deploy boto config
+  template:
+    src: boto.j2
+    dest: /etc/boto.cfg
+    owner: root
+    group: root
+    mode: 0644
+

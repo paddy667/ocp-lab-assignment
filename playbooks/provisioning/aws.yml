@@ -3,6 +3,13 @@
 - hosts: localhost
   connection: local
   gather_facts: False
+  become: True
 
   roles:
+    - { role: boto }
     - { role: provisioning }
+
+  - name: Refresh EC2 cache
+    command: /etc/ansible/ec2.py --refresh-cache
+  - name: Refresh in-memory EC2 cache
+    meta: refresh_inventory

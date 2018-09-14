@@ -3,6 +3,11 @@
 - hosts: all
   gather_facts: True
   become: True
+  vars:
+    timeout: 60
+    ansible_become: yes
+    ansible_ssh_user: ec2-user
 
   roles:
     - { role: etc_hosts }
+

@@ -1,0 +1,3 @@
+{% for ec2_instance in ec2_facts.instances %}
+{{ ec2_instance.private_ip_address }} {{ ec2_instance.tags.hostname }} 
+{% endfor %}

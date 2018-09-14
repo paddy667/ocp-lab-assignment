@@ -15,3 +15,7 @@
          instance_ids: "{{ ec2_id }}"
       delegate_to: "localhost"
 
+    - name: Refresh EC2 cache
+      command: /etc/ansible/ec2.py --refresh-cache
+    - name: Refresh in-memory EC2 cache
+      meta: refresh_inventory
