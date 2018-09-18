@@ -1,11 +1,18 @@
 ---
+
+# TODO: Use a dictionary instead of lists so tasks/main.yml can be cleaned up
+
 master_nodes:
-  - master1.sre.tech
-#  - master2.sre.tech
-#  - master3.sre.tech
+  - master1.phmcmahon.com
+#  - master2.phmcmahon.com
+#  - master3.phmcmahon.com
 infra_nodes:
-  - infra1.sre.tech
-#  - infra2.sre.tech
+  - infra1.phmcmahon.com
+#  - infra2.phmcmahon.com
 app_nodes:
-  - node1.sre.tech
-#  - node2.sre.tech
+  - node1.phmcmahon.com
+#  - node2.phmcmahon.com
+support_nodes:
+  - support1.phmcmahon.com
+lb_nodes:
+  - lb.phmcmahon.com

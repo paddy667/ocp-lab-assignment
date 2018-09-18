@@ -8,8 +8,15 @@
   roles:
     - { role: boto }
     - { role: provisioning }
+  post_tasks:
+    - name: Refresh EC2 cache
+      command: './ec2.py --refresh-cache'
+      args:
+        chdir: 'inventory/'
+      delegate_to: localhost
+      run_once: true
+    - name: Refresh in-memory EC2 cache
+      meta: refresh_inventory
+      delegate_to: localhost
+      run_once: true
 
-  - name: Refresh EC2 cache
-    command: /etc/ansible/ec2.py --refresh-cache
-  - name: Refresh in-memory EC2 cache
-    meta: refresh_inventory

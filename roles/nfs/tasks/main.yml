@@ -1,0 +1,30 @@
+---
+
+- name: Install NFS
+  yum:
+    name: nfs-utils
+    state: present
+
+- name: Enable NFS
+  systemd:
+    name: nfs
+    state: started
+    enabled: yes
+
+- name: Create /srv/nfs directory
+  file:
+    dest: /srv/nfs
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Deploy exports.d fragments
+  copy:
+    src: exports.d/ansible-srv-nfs.exports
+    dest: /etc/exports.d/
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nfs
+

@@ -1,10 +1,15 @@
 ---
 
 - hosts: all
-  connection: local
   gather_facts: False
 
   tasks:
+    - name: Remove Redhat subscription
+      redhat_subscription:
+        state: absent
+        username: "{{ rhn_username }}"
+        password: "{{ rhn_password }}"
+        pool_ids: "{{ rhn_pool_ids }}"
 
     - name: Decom OCP Environment
       ec2:
@@ -16,6 +21,12 @@
       delegate_to: "localhost"
 
     - name: Refresh EC2 cache
-      command: /etc/ansible/ec2.py --refresh-cache
+      command: './ec2.py --refresh-cache'
+      args:
+        chdir: 'inventory/'
+      delegate_to: "localhost"
+      run_once: true
     - name: Refresh in-memory EC2 cache
       meta: refresh_inventory
+      delegate_to: "localhost"
+      run_once: true

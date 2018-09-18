@@ -3,11 +3,25 @@
 - hosts: all
   gather_facts: True
   become: True
-  vars:
-    timeout: 60
-    ansible_become: yes
-    ansible_ssh_user: ec2-user
+
+  pre_tasks:
+    - name: refresh inventory
+      meta: refresh_inventory
 
   roles:
+    - { role: boto }
     - { role: etc_hosts }
+    - { role: rhn }
+    - { role: git }
+
+- hosts: nfs
+  gather_facts: True
+  become: True
+
+  pre_tasks:
+    - name: refresh inventory
+      meta: refresh_inventory
+
+  roles:
+    - { role: nfs }
 
