@@ -14,7 +14,6 @@
      count_tag: 'ocp_master'
      instance_tags:
         env: 'ocp_master'
-        hostname: "{{ item }}"
         Name: "{{ item }}"
   with_items: "{{ master_nodes }}"
   register: ec2_masters
@@ -33,7 +32,6 @@
      count_tag: 'ocp_infra'
      instance_tags:
         env: 'ocp_infra'
-        hostname: "{{ item }}"
         Name: "{{ item }}"
         "kubernetes.io/cluster/{{openshift_node_labels[cluster]}}": 'owned'
   with_items: "{{ infra_nodes }}"
@@ -53,7 +51,6 @@
      count_tag: 'ocp_app'
      instance_tags:
         env: 'ocp_app'
-        hostname: "{{ item }}"
         Name: "{{ item }}"
   with_items: "{{ app_nodes }}"
   register: ec2_app
@@ -72,7 +69,6 @@
      count_tag: 'ocp_lb'
      instance_tags:
         env: 'ocp_lb'
-        hostname: "{{ item }}"
         Name: "{{ item }}"
   with_items: "{{ lb_nodes }}"
   register: ec2_lb
@@ -91,7 +87,6 @@
      count_tag: 'ocp_support'
      instance_tags:
         env: 'ocp_support'
-        hostname: "{{ item }}"
         Name: "{{ item }}"
   with_items: "{{ support_nodes }}"
   register: ec2_support

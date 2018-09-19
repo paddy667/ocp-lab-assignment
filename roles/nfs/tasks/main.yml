@@ -19,6 +19,15 @@
     group: root
     mode: 0755
 
+- name: Create /srv/nfs/user-vols directories
+  file:
+    dest: "/srv/nfs/user-vols/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ pvs }}"
+
 - name: Deploy exports.d fragments
   copy:
     src: exports.d/ansible-srv-nfs.exports
@@ -27,4 +36,14 @@
     group: root
     mode: 0644
   notify: reload nfs
+
+- name: Deploy exports.d fragments for user vols
+  template:
+    src: exports.d/ansible-user-vols.exports.j2
+    dest: /etc/exports.d/
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nfs
+
 
