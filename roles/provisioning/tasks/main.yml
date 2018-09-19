@@ -22,7 +22,7 @@
   ec2:
      key_name: 'aws-ocp-keypair'
      group_id: 'sg-8c4e06ea'
-     instance_type: 't3.medium'
+     instance_type: 't3.large'
      aws_access_key: "{{ aws_access_key }}"
      aws_secret_key: "{{ aws_secret_key }}"
      image: "{{ aws_ami_id }}"

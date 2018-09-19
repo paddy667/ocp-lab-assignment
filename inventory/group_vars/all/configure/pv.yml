@@ -1,0 +1,12 @@
+---
+
+
+
+
+
+openshift_cluster_content:
+- object: pv
+  content:
+  - name: user-vols
+    template: 'pvs/pv1'
+    namespace: default

@@ -4,6 +4,7 @@
 [nodes]
 [nfs]
 [lb]
+[seed-hosts]
 
 [OSEv3:children]
 masters
@@ -36,3 +37,6 @@ tag_env_ocp_support
 
 [lb:children]
 tag_env_ocp_lb
+
+[seed-hosts:children]
+tag_env_ocp_master
