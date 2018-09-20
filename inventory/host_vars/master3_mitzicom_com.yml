@@ -1,5 +1,5 @@
 ---
 
-openshift_hostname: master1.mitizcom.com
+openshift_hostname: master3.mitzicom.com
 openshift_node_group_name: 'node-config-master'
 

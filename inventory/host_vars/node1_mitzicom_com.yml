@@ -1,4 +1,4 @@
 ---
 
-openshift_hostname: node1.mitizcom.com
+openshift_hostname: node1.mitzicom.com
 openshift_node_group_name: 'node-config-compute'

@@ -1,4 +1,4 @@
 ---
 
-openshift_hostname: infra1.mitizcom.com
+openshift_hostname: infra2.mitzicom.com
 openshift_node_group_name: 'node-config-infra'

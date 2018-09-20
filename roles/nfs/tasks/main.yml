@@ -15,16 +15,16 @@
   file:
     dest: /srv/nfs
     state: directory
-    owner: root
-    group: root
+    owner: nfsnobody
+    group: nfsnobody
     mode: 0755
 
 - name: Create /srv/nfs/user-vols directories
   file:
     dest: "/srv/nfs/user-vols/{{ item }}"
     state: directory
-    owner: root
-    group: root
+    owner: nfsnobody
+    group: nfsnobody
     mode: 0755
   with_items: "{{ pvs }}"
 
