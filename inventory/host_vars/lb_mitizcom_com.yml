@@ -1,6 +1,6 @@
 ---
 
-openshift_hostname: lb.phmcmahon.com
+openshift_hostname: lb.mitizcom.com
 openshift_node_group_name: 'node-config-compute'
 
 

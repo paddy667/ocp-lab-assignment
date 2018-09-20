@@ -1,17 +1,17 @@
 ---
 
 master_nodes:
-  - master1.phmcmahon.com
-  - master2.phmcmahon.com
-  - master3.phmcmahon.com
+  - master1.mitzicom.com
+  - master2.mitzicom.com
+  - master3.mitzicom.com
 infra_nodes:
-  - infra1.phmcmahon.com
-  - infra2.phmcmahon.com
+  - infra1.mitzicom.com
+  - infra2.mitzicom.com
 app_nodes:
-  - node1.phmcmahon.com
-  - node2.phmcmahon.com
+  - node1.mitzicom.com
+  - node2.mitzicom.com
 support_nodes:
-  - support1.phmcmahon.com
+  - support1.mitzicom.com
 lb_nodes:
-  - lb.phmcmahon.com
+  - lb.mitzicom.com
 
