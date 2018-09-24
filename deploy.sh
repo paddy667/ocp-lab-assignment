@@ -20,6 +20,8 @@ usage() {
      -r --pre-req-only    Only run the openshift pre-reqs
      -c --cluster-only    Only run the cluster deployment
      -o --openshift-only  Only run the openshift configure playbook
+     -f --fetch-config    Fetches the .kube config so you can connect to the openshift cluster as system:admin after setup
+     -e --enable-recycler Enables the openshift recycler pods
      -z --decom           Decom the cluster
      -h --help            Display this help
   
@@ -45,6 +47,8 @@ cmdline() {
             --pre-req-only)     args="${args}-r ";;
             --cluster-only)     args="${args}-c ";;
             --openshift-only)   args="${args}-o ";;
+            --fetch-config)     args="${args}-f ";;
+            --enable-recycler)  args="${args}-e ";;
             --decom)            args="${args}-z ";;
             --help)             args="${args}-h ";;
             #pass through anything else
@@ -56,7 +60,7 @@ cmdline() {
     #Reset the positional parameters to the short options
     eval set -- $args
 
-    while getopts "dpsrchoz" OPTION
+    while getopts "dpsrchozfe" OPTION
     do
          case $OPTION in
          d)
@@ -76,6 +80,12 @@ cmdline() {
              ;;
          o)
              readonly OPENSHIFT=true
+             ;;
+         f)
+             readonly FETCH=true
+             ;;
+         e)
+             readonly RECYCLER=true
              ;;
          z)
              readonly DECOM=true
@@ -110,6 +120,14 @@ configure_openshift(){
   ansible-playbook playbooks/configure/configure.yml
 }
 
+fetch_config(){
+  ansible masters[0] -m fetch -a'src=/root/.kube/config dest=~/.kube/config flat=yes'
+}
+
+enable_recycler(){
+  ansible-playbook playbooks/configure/enable_recycler.yml
+}
+
 decom(){
   ansible-playbook playbooks/decomissioning/aws.yml
 }
@@ -123,6 +141,7 @@ main(){
     setup
     pre-req
     deploy_cluster
+    fetch_config
     configure_openshift
   elif [[ $PROVISION ]]; then
     provision
@@ -136,6 +155,10 @@ main(){
     decom
   elif [[ $OPENSHIFT ]]; then
     configure_openshift
+  elif [[ $FETCH ]]; then
+    fetch_config
+  elif [[ $RECYCLER ]]; then
+    enable_recycler
   fi
 }
 main
