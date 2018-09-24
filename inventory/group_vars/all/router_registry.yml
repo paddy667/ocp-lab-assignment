@@ -15,6 +15,6 @@ openshift_hosted_registry_storage_access_modes:
   - 'ReadWriteMany'
 openshift_hosted_registry_storage_nfs_directory: '/srv/nfs'
 openshift_hosted_registry_storage_nfs_options: '*(rw,root_squash)'
-openshift_hosted_registry_storage_host: 'support1.phmcmahon.com'
+openshift_hosted_registry_storage_host: 'support1.mitzicom.com'
 openshift_hosted_registry_storage_volume_name: 'registry'
 openshift_hosted_registry_storage_volume_size: '20Gi'

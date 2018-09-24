@@ -1,0 +1,35 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: 'jenkins-network-policy-namespace'
+objects:
+- kind: NetworkPolicy
+  apiVersion: networking.k8s.io/v1
+  metadata:
+    name: ${NAME}
+  spec:
+    podSelector:
+      matchLabels:
+        app: hello-openshift
+    ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            project: ${NAMESPACE_LABEL}
+      ports:
+      - protocol: TCP
+        port: 8080
+      - protocol: TCP
+        port: 50000
+      - protocol: TCP
+        port: 80
+parameters:
+- name: NAME
+  displayName: Name
+  description: Name of the network policy to create
+  required: true
+- name: NAMESPACE_LABEL
+  displayName: Namespace Label
+  description: The Namespace source to allow data from
+  required: true
+

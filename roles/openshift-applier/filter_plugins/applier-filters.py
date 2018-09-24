@@ -45,7 +45,7 @@ def filter_applier_items(applier_list, filter_tags):
 def check_file_location(path, tmp_inv_dir):
     # default return values
     return_vals = {
-        "oc_option_f":  '',
+        "oc_option_f":  '-f',
         "oc_file_path": "%s%s" % (tmp_inv_dir, path),
         "oc_process_local": ''
     }

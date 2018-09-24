@@ -1,0 +1,16 @@
+---
+
+# Define some projects
+cicd_dev:
+  NAMESPACE: cicd-dev
+  NAMESPACE_DISPLAY_NAME: cicd-dev
+cicd_prod:
+  NAMESPACE: cicd-prod
+  NAMESPACE_DISPLAY_NAME: cicd-prod
+cicd_test:
+  NAMESPACE: cicd-test
+  NAMESPACE_DISPLAY_NAME: cicd-test
+cicd:
+  NAMESPACE: cicd
+  NAMESPACE_DISPLAY_NAME: cicd
+
