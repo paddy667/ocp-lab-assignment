@@ -8,3 +8,4 @@
 
   roles:
     - {role: openshift-applier}
+    - {role: openshift-label}

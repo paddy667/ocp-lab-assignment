@@ -32,6 +32,8 @@ openshift_cluster_content:
   - name: jenkins
     namespace: cicd
     template: "apps/jenkins.yml"
+    params_from_vars:
+      ENABLE_OAUTH: false
     action: create
 - object: Policy
   content:
@@ -62,23 +64,13 @@ openshift_cluster_content:
     action: create
 - object: NetworkPolicy
   content:
-    - name: deny-all
-      namespace: cicd
-      file: 'networkpolicy/default_deny.yml'
-      action: create
-    - name: ingress-to-jenkins-cicd-from-cicd-dev
-      namespace: cicd
-      template: 'networkpolicy/allow_jenkins.yml'
-      params_from_vars: "{{ cicd_dev_jenkins_network_policy }}"
-      action: create
-    - name: ingress-to-jenkins-cicd-from-cicd-test
-      namespace: cicd
-      template: 'networkpolicy/allow_jenkins.yml'
-      params_from_vars: "{{ cicd_test_jenkins_network_policy }}"
-      action: create
-    - name: ingress-to-jenkins-cicd-from-cicd-prod
-      namespace: cicd
-      template: 'networkpolicy/allow_jenkins.yml'
-      params_from_vars: "{{ cicd_prod_jenkins_network_policy }}"
-      action: create
+  - name: ingress-to-jenkins-cicd-from-outside
+    namespace: cicd
+    file: 'networkpolicy/allow_jenkins.yml'
+    action: create
+#- object: HorizontalPodAutoscaler
+#  content:
+#    - name: tasks-hpa
+#      file: "hpa/hpa_template.yml"
+#      action: create
 
